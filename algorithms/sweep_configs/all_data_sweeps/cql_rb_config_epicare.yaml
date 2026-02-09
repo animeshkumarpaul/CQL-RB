@@ -1,0 +1,52 @@
+method: grid
+metric:
+  goal: maximize
+  name: normalized_score_mean
+parameters:
+  seed:
+    values:
+      - 1
+      - 2
+      - 3
+      - 4
+  env_seed:
+    values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+  alpha:
+    values:
+      - 1.0
+  alpha_ipm:
+    values:
+      - 1.0
+      - 10.0
+      - 100.0
+      - 1000.0
+  frame_stack:
+    values:
+      - 8
+  include_previous_action:
+    values:
+      - True
+  qf_lr:
+    values:
+      - 0.0001
+  behavior_policy:
+    values:
+      - "biased_different_features"
+  num_checkpoints:
+    values:
+      - 32
+program: algorithms/cql_rb_epicare.py
+
+command:
+  - python
+  - ${program}
+  - train
+  - all_data_sweeps/cql_rb_config_epicare.yaml

@@ -1,0 +1,60 @@
+method: grid
+metric:
+  goal: maximize
+  name: normalized_score_mean
+parameters:
+  seed:
+    values:
+      - 1
+      - 2
+      - 3
+      - 4
+  env_seed:
+    values:
+      - 2
+  env:
+    values:
+      - "AhnChemo-v0"
+  episodes_avail:
+    values:
+      - 15000
+  device:
+   values:
+      - "cuda:1" 
+  batch_size:
+   values:
+     - 256
+  n_episodes:
+    values:
+      - 5000
+  alpha:
+    values:
+      - 1.0
+  alpha_ipm:
+    values:
+      - 1.0
+      - 10.0
+      - 100.0
+      - 1000.0
+  frame_stack:
+    values:
+      - 20
+  include_previous_action:
+    values:
+      - True
+  qf_lr:
+    values:
+      - 0.0001
+  behavior_policy:
+    values:
+      - "biased_ahnChemo"
+  num_checkpoints:
+    values:
+      - 50
+program: algorithms/cql_rb_dtrgym.py
+
+command:
+  - python
+  - ${program}
+  - train
+  - all_data_sweeps/cancer/cql_rb_config_dtrgym.yaml
